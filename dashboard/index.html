@@ -1,0 +1,53 @@
+<template>
+  <stylesheet href="/assets/bootstrap/bootstrap.css"></stylesheet>
+  <stylesheet href="/assets/css/inline-styles.css"></stylesheet>
+  <div class="container">
+    <a href="/">
+      <h1>My App 3</h1>
+    </a>
+    <button class="btn" name="btnLogout">Log out</button>
+    <button class="btn" href="/signup">Sign up</button>
+    <button class="btn" href="/private">Private</button>
+    <hr/>
+    <routes></routes>
+    <img src="/assets/images/invoice1.jpg"/>
+    <img src="/assets/images/invoice2.png"/>
+    <img src="/assets/images/invoice3.png"/>
+  </div>
+</template>
+
+<script runat="client">
+class Client {
+  constructor(){
+  }
+
+  btnButton_click(){
+    // todo: add event code here
+  }
+
+  btnLogout_click(){
+    App.signout();
+  }
+}
+</script>
+
+<script runat="server">
+class Server {
+  constructor(){
+  }
+}
+</script>
+
+<style>
+:host {
+
+}
+
+:host h1 {
+  
+}
+
+:host h1.test {
+  
+}
+</style>

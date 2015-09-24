@@ -1,0 +1,100 @@
+<template extends="div">
+  <h3 class="text-center">Start prototyping</h3>
+  <br/>
+  <if condition="this.state == &quot;edit&quot;">
+    <form-box class="centered">
+      <form obj="this.form" as="form">
+        <formgroup class="inline-labels">
+          <input name="email" value="{{form.email}}" label="Email" placeholder="Your email address"/>
+          <input value="{{form.first_name}}" label="First name" placeholder="Your first name"/>
+          <input value="{{form.last_name}}" label="Last name" placeholder="Your last name"/>
+          <input value="{{form.password}}" type="password" label="Password" placeholder="Choose a password"/>
+          <input value="{{form.invite_code}}" label="Invite Code" placeholder="The invite code you received"/>
+        </formgroup>
+        <button class="btn btn-success btn-signup" name="btnSignup">Sign up</button>
+      </form>
+    </form-box>
+    <else></else>
+    <p>Your account has been created, please sign in.</p>
+  </if>
+</template>
+
+<script runat="client">
+class Client {
+  constructor(){
+    this.state = "edit";
+    this.form = new FormData({email:"",first_name:"",last_name:"",password:"",invite_code:""});
+    this.setFocus("email");
+  }
+
+  btnSignup_click(){
+    Server.signup(this.form);
+    this.state = "done";
+    App.signin("/");
+  }
+}
+</script>
+
+<script runat="server">
+class Server {
+  constructor(){
+  }
+  
+  signup(params){
+    User.canBeAnyone();
+    var error = new ValidationError();
+    if (!params.invite_code){
+      error.field("invite_code","An invite code is required.");
+    }
+    else if (params.invite_code != "iwannamock"){
+       error.field("invite_code","Invalid invite code"); 
+    }
+    error.throwIfAny();
+    
+    params.account_name = params.email;
+    return db.rt_accounts.signup(params); 
+  }
+}
+</script>
+
+<style>
+:host {
+
+}
+.label {
+  display:block;
+  margin-bottom:10px
+}
+.btn-signup {
+  padding:12px 24px;
+  font-size:15px;
+  width:100%
+}
+.inline-labels label {
+  position:absolute;
+  padding-top:12px;
+  padding-left:12px;
+}
+
+.inline-labels .@form-control {
+  padding-left:120px;
+  padding-top:20px;
+  padding-bottom:20px;
+  text-shadow:none;
+  box-shadow:none;
+  border-radius:6px;
+}
+
+.inline-labels .@form-control:focus {
+  border:3px solid #79c0d4;
+  padding-top:18px;
+  padding-bottom:18px;
+  padding-left:118px;
+}
+.centered {
+  max-width:440px;
+  margin:0 auto;
+  padding:60px 40px;
+  border-radius:8px;
+}
+</style>

@@ -1,0 +1,27 @@
+<template extends="div">
+  <div></div>
+</template>
+
+<script runat="client">
+class Client {
+  constructor(){
+    this.entries = db.log.find();
+  }
+}
+</script>
+
+<script runat="server">
+class Server {
+  constructor(){
+  }
+  create() {
+    return "hello"; 
+  }  
+}
+</script>
+
+<style>
+:host {
+
+}
+</style>

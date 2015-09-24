@@ -1,0 +1,31 @@
+<template>
+  <route href="/">
+    <div>Hello. This is the homepage.</div>
+  </route>
+  <route href="/signup">
+    <Signup></Signup>
+  </route>
+  <route href="/private" user-role="user">
+    <h2>Private area</h2>
+  </route>
+</template>
+
+<script runat="client">
+class Client {
+  constructor(){
+  }
+}
+</script>
+
+<script runat="server">
+class Server {
+  constructor(){
+  }
+}
+</script>
+
+<style>
+:host {
+
+}
+</style>
